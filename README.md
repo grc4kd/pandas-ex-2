@@ -8,7 +8,7 @@ the sqlalchemy and pandas modules that can:
 * identify data types, convert values and clean data from real input
 * allow for robust replacement and filtering logic that embrance Python language features
 
-## sqlalchemy(https://www.sqlalchemy.org/)
+## [sqlalchemy](https://www.sqlalchemy.org/)
 * handles queries to MS SQL Server, MySQL, Postgres, and SQLite databases
   - also has an in-memory provider thorugh SQLite engine
 * full ORM to dynamically produce DDL and DML statements through class design and registry
