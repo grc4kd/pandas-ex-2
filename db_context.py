@@ -54,8 +54,8 @@ def GetAddress(addressStr):
         _zip = addressParts[1]
 
     return session.query(Address).filter_by(
-            street=_street, 
-            city=_city, 
-            state=_state, 
+            street=_street,
+            city=_city,
+            state=_state,
             zip=_zip
         ).first()

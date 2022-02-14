@@ -1,12 +1,13 @@
 from db_classes import Address
 from db_context import AddAddress, GetAddress
 
+
 def test_new_address():
     address = Address(
-        street = "16611 Chagrin Blvd",
-        city = "Shaker Heights",
-        state = "OH",
-        zip = "44120"
+        street="16611 Chagrin Blvd",
+        city="Shaker Heights",
+        state="OH",
+        zip="44120"
     )
 
     assert address.id is None
@@ -19,10 +20,10 @@ def test_new_address():
 def test_new_db_address():
     addressStr = "16611 Chagrin Blvd, Shaker Heights, OH 44120"
     _address = Address(
-        street = "16611 Chagrin Blvd",
-        city = "Shaker Heights",
-        state = "OH",
-        zip = "44120"
+        street="16611 Chagrin Blvd",
+        city="Shaker Heights",
+        state="OH",
+        zip="44120"
     )
 
     AddAddress(_address)
