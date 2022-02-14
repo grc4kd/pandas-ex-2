@@ -17,7 +17,7 @@ def test_new_db_user():
 
     user = GetUser(username)
 
-    assert user.id is 1
+    assert user.id == 1
     assert user.name == "sandy"
     assert user.fullname == "Sandy Cheeks"
     assert user.nickname is None
