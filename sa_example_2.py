@@ -1,6 +1,6 @@
 import db_classes
 from db_classes import User
-from sqlalchemy.orm import declarative_base
+from sqlalchemy.orm import sessionmaker
 
 # Create a new Engine instance
 from sqlalchemy import create_engine
@@ -14,7 +14,7 @@ sandy = User(name="sandy", fullname="Sandy Cheeks")
 print(sandy)
 
 # Create a session
-from sqlalchemy.orm import sessionmaker
+
 Session = sessionmaker(bind=engine)
 session = Session()
 

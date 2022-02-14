@@ -4,6 +4,7 @@ from sqlalchemy import Column, Integer, String
 
 Base = declarative_base()
 
+
 class User(Base):
     __tablename__ = 'users'
 
@@ -15,7 +16,8 @@ class User(Base):
     def __repr__(self):
         return "<User(name='%s', fullname='%s', nickname='%s')>" % (
                         self.name, self.fullname, self.nickname)
-            
+
+
 class Address(Base):
     __tablename__ = 'address'
 
