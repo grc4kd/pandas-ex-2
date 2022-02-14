@@ -25,3 +25,8 @@ class Address(Base):
     city = Column(String)
     state = Column(String)
     zip = Column(String)
+
+    def __repr__(self):
+        return "<Address(street='%s', city='%s', state='%s', zip='%s')>" % (
+            self.street, self.city, self.state, self.zip
+        )
