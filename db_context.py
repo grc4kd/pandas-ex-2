@@ -2,9 +2,10 @@ import db_classes
 from db_classes import User, Address
 from sqlalchemy.orm import sessionmaker
 
+
 # Create a new Engine instance
 from sqlalchemy import create_engine
-engine = create_engine("sqlite+pysqlite:///:memory:", echo=True, future=True)
+engine = create_engine("sqlite://", echo=True)
 
 # Create all tables from class schema
 db_classes.Base.metadata.create_all(engine)
@@ -54,8 +55,8 @@ def GetAddress(addressStr):
         _zip = addressParts[1]
 
     return session.query(Address).filter_by(
-            street=_street,
-            city=_city,
-            state=_state,
-            zip=_zip
-        ).first()
+        street=_street,
+        city=_city,
+        state=_state,
+        zip=_zip
+    ).first()
