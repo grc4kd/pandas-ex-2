@@ -19,7 +19,7 @@ ipykernel==6.9.1
 ipython==8.0.1
 jedi==0.18.1
 jupyter-client==7.1.2
-jupyter-core==4.9.1
+jupyter-core==4.9.2
 matplotlib-inline==0.1.3
 mccabe==0.7.0
 mypy-extensions==0.4.3
