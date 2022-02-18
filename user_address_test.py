@@ -1,8 +1,10 @@
 from db_classes import User, Address
-from db_context import AddUser, AddAddress, AddUserAddress, GetFirstUserAddress, GetUser
+from db_context import AddUser, AddAddress, AddUserAddress,\
+    GetFirstUserAddress, GetUser
+
 
 # one user can have many addresses
-def test_new_user_with_address():
+def test_new_db_user_with_address():
     _user = User(name="sandy", fullname="Sandy Cheeks")
     _address = Address(
         street="16611 Chagrin Blvd",
@@ -27,6 +29,7 @@ def test_new_user_with_address():
     assert address.city == "Shaker Heights"
     assert address.state == "OH"
     assert address.zip == "44120"
+
 
 # one user can have many addresses
 def test_new_user_with_address():

@@ -42,14 +42,14 @@ def AddAddress(address: Address):
 # one user may have many addresses
 def AddUserAddress(name, address: Address):
     _user = GetUser(name)
-    
+
     # check to see if this address exists in the db already
     _address = GetAddress(address)
     if (_address is None):
         # add missing address to db
         AddAddress(address)
         _address = GetAddress(address)
-    
+
     # link user to address
     _user.addresses.append(_address)
 
@@ -59,10 +59,10 @@ def GetAddress(address: Address):
     stmt = (
         select(Address).
         where(
-            Address.street==address.street,
-            Address.city==address.city,
-            Address.state==address.state,
-            Address.zip==address.zip
+            Address.street == address.street,
+            Address.city == address.city,
+            Address.state == address.state,
+            Address.zip == address.zip
         ).limit(1)
     )
     result = session.execute(stmt)
@@ -108,8 +108,8 @@ def ParseAddress(addressStr):
 def GetFirstUserAddress(name):
     _user = GetUser(name)
     stmt = (
-        select (Address).
-        where (Address.user_id==_user.id)
+        select(Address).
+        where(Address.user_id == _user.id)
     )
     result = session.execute(stmt)
     for row in result.scalars():
