@@ -1,5 +1,5 @@
 from db_classes import Address
-from db_context import AddAddress, GetAddress
+from db_context import AddAddress, ParseAddress
 
 
 def test_new_address():
@@ -28,7 +28,7 @@ def test_new_db_address():
 
     AddAddress(_address)
 
-    address = GetAddress(addressStr)
+    address = ParseAddress(addressStr)
 
     assert address.id == 1
     assert address.street == "16611 Chagrin Blvd"

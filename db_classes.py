@@ -12,11 +12,11 @@ class User(Base):
     name = Column(String)
     fullname = Column(String)
     nickname = Column(String)
-    addresses = relationship("Address")
+
+    addresses = relationship("Address", back_populates="user")
 
     def __repr__(self):
-        return "<User(name='%s', fullname='%s', nickname='%s')>" % (
-            self.name, self.fullname, self.nickname)
+        return f"User(id={self.id!r}, name={self.name!r}, fullname={self.fullname!r})"
 
 
 class Address(Base):
@@ -29,7 +29,7 @@ class Address(Base):
     state = Column(String)
     zip = Column(String)
 
+    user = relationship("User", back_populates="addresses")
+
     def __repr__(self):
-        return "<Address(street='%s', city='%s', state='%s', zip='%s')>" % (
-            self.street, self.city, self.state, self.zip
-        )
+        return f"Address(id={self.id!r}, {self.street}, {self.city}, {self.state} {self.zip})"

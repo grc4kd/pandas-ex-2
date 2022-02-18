@@ -1,5 +1,5 @@
 from db_classes import User, Address
-from db_context import AddAddress, GetAddress, AddUser, GetUser
+from db_context import AddAddress, AddUserAddress, ParseAddress, AddUser, GetFirstUserAddress, GetUser
 
 # Create new user
 sandy = User(name="sandy", fullname="Sandy Cheeks")
@@ -21,5 +21,10 @@ address = Address(
 )
 
 AddAddress(address)
-our_address = GetAddress("16611 Chagrin Blvd, Shaker Heights, OH 44120")
+our_address = ParseAddress("16611 Chagrin Blvd, Shaker Heights, OH 44120")
 print(our_address)
+
+AddUserAddress(our_user.name, our_address)
+
+loc_address = GetFirstUserAddress(our_user.name)
+print(loc_address)

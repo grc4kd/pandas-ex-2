@@ -4,8 +4,8 @@ from sqlalchemy.orm import sessionmaker
 
 
 # Create a new Engine instance
-from sqlalchemy import create_engine
-engine = create_engine("sqlite://", echo=True)
+from sqlalchemy import create_engine, select
+engine = create_engine("sqlite://", echo=True, future=True)
 
 # Create all tables from class schema
 db_classes.Base.metadata.create_all(engine)
@@ -22,16 +22,56 @@ def AddUser(user: User):
 
 # get a user
 def GetUser(name):
-    return session.query(User).filter_by(name=name).first()
+    stmt = (
+        select(User).
+        where(User.name == name)
+    )
+    result = session.execute(stmt)
+    for row in result.scalars():
+        return row
 
 
-# add an adress
+# add an address
 def AddAddress(address: Address):
-    session.add(address)
+    # do not add duplicate addresses
+    if (GetAddress(address) is None):
+        session.add(address)
+
+
+# add an address for to a user
+# one user may have many addresses
+def AddUserAddress(name, address: Address):
+    _user = GetUser(name)
+    
+    # check to see if this address exists in the db already
+    _address = GetAddress(address)
+    if (_address is None):
+        # add missing address to db
+        AddAddress(address)
+        _address = GetAddress(address)
+    
+    # link user to address
+    _user.addresses.append(_address)
+
+
+# get an address, by scanning for address attrs
+def GetAddress(address: Address):
+    stmt = (
+        select(Address).
+        where(
+            Address.street==address.street,
+            Address.city==address.city,
+            Address.state==address.state,
+            Address.zip==address.zip
+        ).limit(1)
+    )
+    result = session.execute(stmt)
+    for row in result.scalars():
+        return row
 
 
 # get an address, by parsing an address string
-def GetAddress(addressStr):
+def ParseAddress(addressStr):
     addressParts = addressStr.split(",")
 
     # read-in address in order, street number and name first
@@ -54,9 +94,23 @@ def GetAddress(addressStr):
     if (len(addressParts[1]) > 0):
         _zip = addressParts[1]
 
-    return session.query(Address).filter_by(
+    _address = Address(
         street=_street,
         city=_city,
         state=_state,
         zip=_zip
-    ).first()
+    )
+    return GetAddress(_address)
+
+
+# get the first address for a user
+# based on their user name
+def GetFirstUserAddress(name):
+    _user = GetUser(name)
+    stmt = (
+        select (Address).
+        where (Address.user_id==_user.id)
+    )
+    result = session.execute(stmt)
+    for row in result.scalars():
+        return row
