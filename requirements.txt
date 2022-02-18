@@ -47,7 +47,7 @@ pyzmq==22.3.0
 six==1.16.0
 smmap==5.0.0
 SQLAlchemy==1.4.31
-stack-data==0.1.4
+stack-data==0.2.0
 stevedore==3.5.0
 tomli==2.0.1
 tornado==6.1
