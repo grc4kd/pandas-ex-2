@@ -1,6 +1,7 @@
 import pytest
 from db_classes import User
 from db_context import DbContext
+import sqlalchemy
 from sqlalchemy import create_engine
 
 
@@ -63,3 +64,35 @@ def test_update_db_user(new_engine):
     assert user.name == "patrick"
     assert user.fullname == "Patrick Star"
     assert user.nickname == "Pat"
+
+
+def test_attempt_duplicate_username(new_engine):
+    _context = DbContext(new_engine)
+
+    username = "pstarfish"
+    _user = User(
+        name=username,
+        fullname="Patrick Star",
+        nickname="Patrick"
+    )
+
+    _context.AddUser(_user)
+    # throw away the user returned from context for testing
+    _ = _context.GetUser(username)
+    _context = DbContext(new_engine)
+
+    username = "pstarfish"
+    _user = User(
+        name=username,
+        fullname="Phony Baloney",
+        nickname="Hatrick"
+    )
+
+    with pytest.raises(sqlalchemy.exc.IntegrityError):
+        _context.AddUser(_user)
+
+        try:
+            _ = _context.GetUser(username)
+        except sqlalchemy.exc.IntegrityError as ex:
+            print(f"Exception type name: {type(ex).__name__}")
+            raise ex

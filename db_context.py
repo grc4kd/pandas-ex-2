@@ -27,8 +27,7 @@ class DbContext():
             where(User.name == name)
         )
         result = self.session.execute(stmt)
-        for row in result.scalars():
-            return row
+        return result.scalars().first()
 
     # add an address
     def AddAddress(self, address: Address):

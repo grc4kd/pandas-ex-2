@@ -9,7 +9,7 @@ class User(Base):
     __tablename__ = 'user'
 
     id = Column(Integer, primary_key=True)
-    name = Column(String)
+    name = Column(String, unique=True)
     fullname = Column(String)
     nickname = Column(String)
 
