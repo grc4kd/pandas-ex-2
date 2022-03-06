@@ -52,8 +52,13 @@ def test_update_db_user(new_engine):
     user = _context.GetUser(username)
 
     user.nickname = "Pat"
-    user.name = "patrick"
+    new_username = "patrick"
+    user.name = new_username
 
+    user = _context.GetUser(new_username)
+
+    assert user._sa_instance_state.modified is False
+    assert user._sa_instance_state.persistent is True
     assert user.id == 1
     assert user.name == "patrick"
     assert user.fullname == "Patrick Star"
