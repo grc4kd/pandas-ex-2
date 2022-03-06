@@ -1,5 +1,6 @@
 from db_classes import User, Address
-from db_context import AddAddress, AddUserAddress, ParseAddress, AddUser, GetFirstUserAddress, GetUser
+from db_context import AddAddress, AddUserAddress, ParseAddress, AddUser,\
+    GetFirstUserAddress, GetUser
 
 # Create new user
 sandy = User(name="sandy", fullname="Sandy Cheeks")
