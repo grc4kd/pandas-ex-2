@@ -3,6 +3,7 @@ from db_classes import User, Address
 from db_context import DbContext
 from sqlalchemy import create_engine
 
+
 # reusable fixture to run for each test
 # create a new engine object for each test / new local db
 @pytest.fixture
